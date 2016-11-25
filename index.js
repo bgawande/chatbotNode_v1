@@ -41,7 +41,8 @@ app.post('/webhook/', function (req, res) {
 			
 			request({
 				url: 'http://72.55.146.142:9091/chatbot/rest/Chatbot/getResponse?request='+text,
-				method: 'GET'
+				method: 'GET',
+				async:false
 				}, function(error, response, body) {
 				if (error) {
 					console.log('Error sending messages: ', error)
