@@ -47,13 +47,9 @@ app.post('/webhook/', function (req, res) {
 				if (error) {
 					console.log('Error sending messages: ', error)
 				}else{
-					console.log("response");
-					console.log(response.body);
-					text  = response.body;
+					sendTextMessage(sender, response.body);
 				}
 			})
-			
-			sendTextMessage(sender, text);
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
