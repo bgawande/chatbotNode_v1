@@ -40,22 +40,19 @@ app.post('/webhook/', function (req, res) {
 			//~ }
 			
 			request({
-			url: 'http://72.55.146.142:9091/chatbot/rest/Chatbot/getResponse?request='+text,
-			method: 'GET'
-		}, function(error, response, body) {
-			console.log('first');
-			console.log(response);
-			if (error) {
-				console.log('Error sending messages: ', error)
-			} else if (response.body.error) {
-				console.log('Error: ', response.body.error)
-			}else{
-				console.log('second');
-				console.log(response);
-			}
-		})
+				url: 'http://72.55.146.142:9091/chatbot/rest/Chatbot/getResponse?request='+text,
+				method: 'GET'
+				}, function(error, response, body) {
+				if (error) {
+					console.log('Error sending messages: ', error)
+				}else{
+					console.log("response");
+					console.log(response.body);
+					text  = response.body;
+				}
+			})
 			
-			sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
+			sendTextMessage(sender, "Text received, echo: " + text);
 		}
 		if (event.postback) {
 			let text = JSON.stringify(event.postback)
