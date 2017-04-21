@@ -31,7 +31,8 @@ app.post('/webhookToChatbot/', function (req, res) {
 	console.log(req.body);
 	console.log("text === "+req.body.result.resolvedQuery);
 		request({
-				url: 'http://192.168.7.53:7070/chatbot/rest/Chatbot/getResponse?request='+req.body.result.resolvedQuery,
+				//url: 'http://192.168.7.53:7070/chatbot/rest/Chatbot/getResponse?request='+req.body.result.resolvedQuery,
+				url: 'http://72.55.146.142:9091/chatbot/rest/Chatbot/getResponse?request='+req.body.result.resolvedQuery,
 				method: 'GET',
 				async:false
 				}, function(error, response, body) {
