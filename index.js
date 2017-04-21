@@ -26,11 +26,29 @@ app.get('/webhook/', function (req, res) {
 	res.send('Error, wrong token')
 })
 
-// to post data
-app.post('/webhook/', function (req, res) {
+app.post('/webhookToChatbot/', function (req, res) {
 	console.log("requset arrived");
 	console.log(req.body);
-	console.log("=================");
+	console.log("text === "+req.body.result.resolvedQuery);
+		request({
+				url: 'https://103.204.52.2:28443/chatbot/rest/Chatbot/getResponse?request='+req.body.result.resolvedQuery,
+				method: 'GET',
+				async:false
+				}, function(error, response, body) {
+				if (error) {
+					console.log('Error sending messages: ', error)
+				}else{
+					console.log("in else response block............");
+					console.log(response.body);
+					res.send(response.body);
+				}
+			})	
+		res.sendStatus(200);
+})
+
+
+// to post data
+app.post('/webhook/', function (req, res) {
 	let messaging_events = req.body.entry[0].messaging
 	for (let i = 0; i < messaging_events.length; i++) {
 		let event = req.body.entry[0].messaging[i]
@@ -43,8 +61,7 @@ app.post('/webhook/', function (req, res) {
 			//~ }
 			
 			request({
-				//url: 'http://72.55.146.142:9091/chatbot/rest/Chatbot/getResponse?request='+text,
-				url: 'https://103.204.52.2:28443/chatbot/rest/Chatbot/getResponse?request='+text,
+				url: 'http://72.55.146.142:9091/chatbot/rest/Chatbot/getResponse?request='+text,
 				method: 'GET',
 				async:false
 				}, function(error, response, body) {
