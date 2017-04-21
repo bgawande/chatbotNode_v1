@@ -27,7 +27,7 @@ app.get('/webhook/', function (req, res) {
 })
 
 app.post('/webhookToChatbot/', function (req, res) {
-	console.log("requset arrived");
+	console.log("request arrived");
 	console.log(req.body);
 	console.log("text === "+req.body.result.resolvedQuery);
 		request({
@@ -42,7 +42,8 @@ app.post('/webhookToChatbot/', function (req, res) {
 					console.log(response.body);
 					res.send(response.body);
 				}
-			})	
+			})
+		console.log("At the end of response................befor status 200....");
 		res.sendStatus(200);
 })
 
