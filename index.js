@@ -43,7 +43,8 @@ app.post('/webhook/', function (req, res) {
 			//~ }
 			
 			request({
-				url: 'http://72.55.146.142:9091/chatbot/rest/Chatbot/getResponse?request='+text,
+				//url: 'http://72.55.146.142:9091/chatbot/rest/Chatbot/getResponse?request='+text,
+				url: 'https://103.204.52.2:28443/chatbot/rest/Chatbot/getResponse?request='+text,
 				method: 'GET',
 				async:false
 				}, function(error, response, body) {
